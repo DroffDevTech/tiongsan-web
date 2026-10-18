@@ -1,15 +1,34 @@
 
-/* =========================================================
-   TIONG SAN WEBSITE - JAVASCRIPT
-   ========================================================= */
+/* =========================================
+   TIONG SAN WEBSITE
+   MAIN JAVASCRIPT
+   ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
   const navLinks = document.querySelectorAll(".nav-link");
+  const contactForm = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
   const currentYear = document.getElementById("currentYear");
+  const backToTop = document.getElementById("backToTop");
 
-  // Automatically update the copyright year.
+  /*
+    CONTACT EMAIL SETUP
+
+    Replace the empty string below with the official
+    Tiong San email address before publishing.
+
+    Example:
+    const CONTACT_EMAIL = "your-official-email@example.com";
+
+    No email address has been supplied yet, so the form
+    will prepare an email without a recipient. The customer
+    must enter the recipient before sending.
+  */
+  const CONTACT_EMAIL = "";
+
+  // Update the copyright year automatically.
   if (currentYear) {
     currentYear.textContent = new Date().getFullYear();
   }
@@ -18,19 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeMenu() {
     if (!menuToggle || !mainNav) return;
 
+    mainNav.classList.remove("open");
     menuToggle.setAttribute("aria-expanded", "false");
     menuToggle.setAttribute("aria-label", "Open navigation menu");
-    mainNav.classList.remove("is-open");
     document.body.classList.remove("menu-open");
-  }
-
-  function openMenu() {
-    if (!menuToggle || !mainNav) return;
-
-    menuToggle.setAttribute("aria-expanded", "true");
-    menuToggle.setAttribute("aria-label", "Close navigation menu");
-    mainNav.classList.add("is-open");
-    document.body.classList.add("menu-open");
   }
 
   if (menuToggle && mainNav) {
@@ -41,22 +51,26 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isOpen) {
         closeMenu();
       } else {
-        openMenu();
+        mainNav.classList.add("open");
+        menuToggle.setAttribute("aria-expanded", "true");
+        menuToggle.setAttribute("aria-label", "Close navigation menu");
+        document.body.classList.add("menu-open");
       }
     });
 
-    // Close the mobile menu after choosing a section.
     navLinks.forEach((link) => {
       link.addEventListener("click", closeMenu);
     });
 
-    // Close the menu when clicking outside the navigation.
-    document.addEventListener("click", (event) => {
-      const isOpen =
-        menuToggle.getAttribute("aria-expanded") === "true";
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
 
+    document.addEventListener("click", (event) => {
       if (
-        isOpen &&
+        mainNav.classList.contains("open") &&
         !mainNav.contains(event.target) &&
         !menuToggle.contains(event.target)
       ) {
@@ -64,71 +78,124 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Close the menu using the Escape key.
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeMenu();
-        menuToggle.focus();
-      }
-    });
-
-    // Restore the normal desktop navigation after resizing.
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 760) {
+      if (window.innerWidth > 820) {
         closeMenu();
       }
     });
   }
 
   // Highlight the navigation link for the visible section.
-  const sections = document.querySelectorAll(
-    "main section[id]"
-  );
+  const sections = document.querySelectorAll("main section[id]");
 
-  if ("IntersectionObserver" in window && sections.length > 0) {
-    const observer = new IntersectionObserver(
+  if ("IntersectionObserver" in window && sections.length) {
+    const sectionObserver = new IntersectionObserver(
       (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              b.intersectionRatio - a.intersectionRatio
-          );
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
 
-        if (visibleEntries.length === 0) return;
+          const sectionId = entry.target.id;
 
-        const activeId = visibleEntries[0].target.id;
+          navLinks.forEach((link) => {
+            const isActive =
+              link.getAttribute("href") === `#${sectionId}`;
 
-        navLinks.forEach((link) => {
-          const isActive =
-            link.getAttribute("href") === `#${activeId}`;
-
-          link.classList.toggle("active", isActive);
-
-          if (isActive) {
-            link.setAttribute("aria-current", "location");
-          } else {
-            link.removeAttribute("aria-current");
-          }
+            link.classList.toggle("active", isActive);
+          });
         });
       },
       {
-        root: null,
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: [0, 0.1, 0.25, 0.5]
+        rootMargin: "-25% 0px -60% 0px",
+        threshold: 0
       }
     );
 
-    sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => {
+      sectionObserver.observe(section);
+    });
   }
 
-  // Keep broken remote images from showing a broken-image icon.
-  // The HTML alt text remains available to assistive technology.
+  // Show the back-to-top button after scrolling.
+  function updateBackToTop() {
+    if (!backToTop) return;
+
+    backToTop.classList.toggle(
+      "visible",
+      window.scrollY > 500
+    );
+  }
+
+  window.addEventListener("scroll", updateBackToTop, {
+    passive: true
+  });
+
+  updateBackToTop();
+
+  // Hide images that fail to load.
   document.querySelectorAll("img").forEach((img) => {
     img.addEventListener("error", () => {
       img.classList.add("image-unavailable");
     });
+
+    if (img.complete && img.naturalWidth === 0) {
+      img.classList.add("image-unavailable");
+    }
   });
 
-  console.log("Tiong San website initialized.");
+  // Contact form: prepare a message in the user's email application.
+  if (contactForm && formStatus) {
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      formStatus.textContent = "";
+
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+
+      const formData = new FormData(contactForm);
+
+      const name = String(formData.get("name") || "").trim();
+      const email = String(formData.get("email") || "").trim();
+      const subject = String(formData.get("subject") || "").trim();
+      const message = String(formData.get("message") || "").trim();
+
+      if (!name || !email || !subject || !message) {
+        formStatus.textContent =
+          "Please complete all required fields.";
+        return;
+      }
+
+      const emailSubject =
+        `Tiong San Website Inquiry: ${subject}`;
+
+      const emailBody = [
+        "Hello Tiong San Team,",
+        "",
+        "I would like to make an inquiry.",
+        "",
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Subject: ${subject}`,
+        "",
+        "Message:",
+        message,
+        "",
+        "Sent through the Tiong San website contact form."
+      ].join("\n");
+
+      const recipient = CONTACT_EMAIL.trim();
+
+      const mailtoUrl =
+        `mailto:${encodeURIComponent(recipient)}` +
+        `?subject=${encodeURIComponent(emailSubject)}` +
+        `&body=${encodeURIComponent(emailBody)}`;
+
+      formStatus.textContent =
+        "Opening your email application. Please review and send your message.";
+
+      // Open the user's configured email application.
+      window.location.href = mailtoUrl;
+    });
+  }
 });

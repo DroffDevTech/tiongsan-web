@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#a90000">
-  <meta name="description" content="Discover shopping, departments, promotions, and store information from Tiong San in Baguio and nearby areas.">
+  <meta name="description" content="Discover Tiong San shopping, departments, promotions, store information, and customer contact details in Baguio and beyond.">
   <title>Tiong San | Your Shopping Destination</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,381 +14,383 @@
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
+
 <body>
   <div class="announcement">
-    <p>Welcome to Tiong San — discover more with every visit.</p>
+    Your shopping destination in the City of Baguio
   </div>
 
   <header class="site-header">
-    <div class="nav-container">
-      <a href="#home" class="logo" aria-label="Tiong San home">
-        <img src="assets/ts-logo.png" alt="Tiong San logo" class="logo-image">
+    <div class="header-inner">
+      <a class="brand" href="#home" aria-label="Tiong San home">
+        <img src="assets/ts-logo.png" alt="Tiong San logo"
+             onerror="this.style.display='none'">
+        <span class="brand-fallback">TIONG <b>SAN</b></span>
       </a>
 
       <button class="menu-toggle" id="menuToggle"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-        aria-controls="mainNav">
-        <span></span>
-        <span></span>
-        <span></span>
+              aria-label="Open navigation menu"
+              aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
       </button>
 
-      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <nav class="main-nav" id="mainNav">
         <a href="#home" class="nav-link active">Home</a>
         <a href="#departments" class="nav-link">Departments</a>
         <a href="#promotions" class="nav-link">Promotions</a>
         <a href="#stores" class="nav-link">Our Stores</a>
         <a href="#about" class="nav-link">About Us</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#contact" class="nav-link nav-contact">Contact Us</a>
       </nav>
-
-      <a class="nav-cta" href="#stores">Find a Store <span>↗</span></a>
     </div>
   </header>
 
   <main>
     <!-- HERO -->
-    <section class="hero section" id="home">
-      <div class="hero-copy">
-        <span class="eyebrow"><span class="eyebrow-dot"></span> A local shopping destination</span>
-        <h1>Discover more.<br><span>Shop with us.</span></h1>
-        <p class="hero-description">
-          Explore shopping essentials, exciting finds, and everyday favorites
-          with Tiong San. Find a department or plan your next store visit.
+    <section class="hero" id="home">
+      <div class="hero-image"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <span class="eyebrow">WELCOME TO TIONG SAN</span>
+        <h1>Your Everyday Shopping<br><span>Destination</span></h1>
+        <p>
+          Discover everyday essentials, fashion, home finds, and more
+          at Tiong San.
         </p>
-
         <div class="hero-actions">
-          <a href="#departments" class="button button-primary">
-            Explore Departments <span>→</span>
-          </a>
-          <a href="#stores" class="button button-secondary">Find Our Stores</a>
-        </div>
-
-        <div class="hero-note">
-          <span class="note-icon">✦</span>
-          <p>Discover something for every shopping day.</p>
+          <a class="btn btn-primary" href="#departments">Explore Departments</a>
+          <a class="btn btn-glass" href="#stores">Find Our Stores</a>
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="hero-image-frame glass-panel">
-          <img
-            src="https://i0.wp.com/mymonol.com/wp-content/uploads/2023/07/tiongsan-harisson.png?ssl=1"
-            alt="Tiong San storefront on Harrison Road in Baguio City"
-            class="hero-image"
-            fetchpriority="high"
-          >
-          <div class="image-caption">
-            <span class="caption-icon">⌖</span>
-            <div>
-              <strong>Tiong San</strong>
-              <span>Harrison Road, Baguio City</span>
-            </div>
-          </div>
-        </div>
-        <div class="floating-tag tag-top">
-          <span class="tag-star">✦</span>
-          <span>Discover local favorites</span>
-        </div>
-        <div class="floating-tag tag-bottom">
-          <span class="tag-pin">⌖</span>
-          <span>Find your nearest store</span>
-        </div>
-        <div class="hero-decoration decoration-one"></div>
-        <div class="hero-decoration decoration-two"></div>
+      <div class="hero-bottom">
+        <span>SHOP • DISCOVER • ENJOY</span>
+        <a href="#departments" aria-label="Scroll to departments">↓</a>
       </div>
     </section>
 
-    <!-- QUICK LINKS -->
-    <section class="quick-links section-shell" aria-label="Quick links">
-      <a href="#departments" class="quick-link">
-        <span class="quick-icon">▦</span>
-        <span><strong>Departments</strong><small>Explore what we offer</small></span>
-        <span class="quick-arrow">↗</span>
-      </a>
-      <a href="#promotions" class="quick-link">
-        <span class="quick-icon">✧</span>
-        <span><strong>Promotions</strong><small>See featured offers</small></span>
-        <span class="quick-arrow">↗</span>
-      </a>
-      <a href="#stores" class="quick-link">
-        <span class="quick-icon">⌖</span>
-        <span><strong>Store Directory</strong><small>Plan your visit</small></span>
-        <span class="quick-arrow">↗</span>
-      </a>
+    <!-- QUICK HIGHLIGHTS -->
+    <section class="quick-highlights">
+      <div class="highlight">
+        <span class="highlight-icon">✦</span>
+        <div>
+          <h3>Everyday Essentials</h3>
+          <p>Discover items for your daily needs.</p>
+        </div>
+      </div>
+      <div class="highlight">
+        <span class="highlight-icon">◇</span>
+        <div>
+          <h3>More to Explore</h3>
+          <p>Browse different shopping categories.</p>
+        </div>
+      </div>
+      <div class="highlight">
+        <span class="highlight-icon">♡</span>
+        <div>
+          <h3>We're Here to Help</h3>
+          <p>Reach us through our contact details.</p>
+        </div>
+      </div>
     </section>
 
     <!-- DEPARTMENTS -->
-    <section class="section section-shell" id="departments">
+    <section class="section section-light" id="departments">
       <div class="section-heading">
-        <div>
-          <span class="eyebrow">Explore Tiong San</span>
-          <h2>Something for <span>every day.</span></h2>
-          <p>Browse our featured shopping categories.</p>
-        </div>
-        <a href="#stores" class="text-link">Visit our stores <span>→</span></a>
+        <span class="eyebrow red">DISCOVER MORE</span>
+        <h2>Explore Our Departments</h2>
+        <p>Find something for every part of your everyday life.</p>
       </div>
 
       <div class="department-grid">
-        <a href="#stores" class="department-card">
-          <div class="department-image">
-            <img src="https://images.unsplash.com/photo-1604719312566-8912e9c8a213?auto=format&fit=crop&w=800&q=85"
-              alt="Supermarket shelves with everyday groceries" loading="lazy">
-            <span class="department-number">01</span>
-          </div>
+        <article class="department-card">
+          <img
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80"
+            alt="Clothing displayed in a retail store" loading="lazy">
           <div class="department-info">
-            <div><h3>Supermarket</h3><p>Everyday shopping essentials</p></div>
-            <span class="round-arrow">↗</span>
+            <span>01</span>
+            <h3>Fashion & Apparel</h3>
+            <p>Explore clothing and everyday style essentials.</p>
           </div>
-        </a>
+        </article>
 
-        <a href="#stores" class="department-card">
-          <div class="department-image">
-            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=85"
-              alt="Retail clothing and fashion display" loading="lazy">
-            <span class="department-number">02</span>
-          </div>
+        <article class="department-card">
+          <img
+            src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=900&q=80"
+            alt="Personal care products" loading="lazy">
           <div class="department-info">
-            <div><h3>Fashion & Apparel</h3><p>Styles for different occasions</p></div>
-            <span class="round-arrow">↗</span>
+            <span>02</span>
+            <h3>Beauty & Personal Care</h3>
+            <p>Discover beauty and personal care finds.</p>
           </div>
-        </a>
+        </article>
 
-        <a href="#stores" class="department-card">
-          <div class="department-image">
-            <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=85"
-              alt="Personal care and beauty products" loading="lazy">
-            <span class="department-number">03</span>
-          </div>
+        <article class="department-card">
+          <img
+            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80"
+            alt="Comfortable home furniture" loading="lazy">
           <div class="department-info">
-            <div><h3>Beauty & Personal Care</h3><p>Daily care and beauty finds</p></div>
-            <span class="round-arrow">↗</span>
+            <span>03</span>
+            <h3>Home & Living</h3>
+            <p>Find inspiration for your home.</p>
           </div>
-        </a>
+        </article>
 
-        <a href="#stores" class="department-card">
-          <div class="department-image">
-            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=85"
-              alt="Comfortable home furniture and decor" loading="lazy">
-            <span class="department-number">04</span>
-          </div>
+        <article class="department-card">
+          <img
+            src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=80"
+            alt="Clothing and accessories" loading="lazy">
           <div class="department-info">
-            <div><h3>Home & Living</h3><p>Ideas for your living space</p></div>
-            <span class="round-arrow">↗</span>
+            <span>04</span>
+            <h3>Accessories</h3>
+            <p>Complete your look with everyday accessories.</p>
           </div>
-        </a>
+        </article>
 
-        <a href="#stores" class="department-card">
-          <div class="department-image">
-            <img src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=800&q=85"
-              alt="Children's clothing and accessories" loading="lazy">
-            <span class="department-number">05</span>
-          </div>
+        <article class="department-card">
+          <img
+            src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=80"
+            alt="Shoes displayed in a shop" loading="lazy">
           <div class="department-info">
-            <div><h3>Kids & Family</h3><p>Find items for the family</p></div>
-            <span class="round-arrow">↗</span>
+            <span>05</span>
+            <h3>Footwear</h3>
+            <p>Explore footwear for different occasions.</p>
           </div>
-        </a>
+        </article>
 
-        <a href="#stores" class="department-card">
-          <div class="department-image">
-            <img src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?auto=format&fit=crop&w=800&q=85"
-              alt="Assorted shopping products and accessories" loading="lazy">
-            <span class="department-number">06</span>
-          </div>
+        <article class="department-card">
+          <img
+            src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=80"
+            alt="Stationery and notebooks" loading="lazy">
           <div class="department-info">
-            <div><h3>More to Explore</h3><p>Discover more in store</p></div>
-            <span class="round-arrow">↗</span>
+            <span>06</span>
+            <h3>School & Office</h3>
+            <p>Get ready for school, work, and projects.</p>
           </div>
-        </a>
+        </article>
       </div>
-      <p class="section-footnote">
-        Category descriptions and photos are illustrative. Confirm actual departments and product availability with each branch.
+
+      <p class="section-note">
+        Department categories and product availability may vary by store.
       </p>
     </section>
 
     <!-- PROMOTIONS -->
-    <section class="promo-section" id="promotions">
-      <div class="promo-inner section-shell">
+    <section class="section promotions-section" id="promotions">
+      <div class="promo-panel">
         <div class="promo-copy">
-          <span class="eyebrow eyebrow-light">The Tiong San experience</span>
-          <h2>Make room for<br><span>your next find.</span></h2>
+          <span class="eyebrow">SPECIAL FINDS</span>
+          <h2>More Reasons<br>to Shop at Tiong San</h2>
           <p>
-            Looking for something new? Visit a Tiong San store to discover
-            products, seasonal selections, and in-store announcements.
+            Visit our stores to discover available promotions, seasonal
+            offers, and exciting finds.
           </p>
-          <a href="#stores" class="button button-gold">Plan Your Visit <span>→</span></a>
-          <p class="promo-disclaimer">Check with your local branch for current promotions and terms.</p>
+          <a href="#contact" class="btn btn-light">Ask About Promotions</a>
         </div>
-        <div class="promo-art">
-          <div class="promo-orbit orbit-one"></div>
-          <div class="promo-orbit orbit-two"></div>
-          <div class="promo-card">
-            <img src="assets/ts-logo.png" alt="Tiong San logo" loading="lazy">
-            <span>DISCOVER MORE</span>
-            <strong>Shop your way.</strong>
-            <small>Visit Tiong San</small>
+        <div class="promo-decoration">
+          <div class="promo-circle circle-one"></div>
+          <div class="promo-circle circle-two"></div>
+          <div class="promo-glass">
+            <span>DISCOVER</span>
+            <strong>Something<br>Special</strong>
+            <small>AT TIONG SAN</small>
           </div>
-          <div class="promo-spark spark-one">✦</div>
-          <div class="promo-spark spark-two">✧</div>
         </div>
       </div>
-    </section>
-
-    <!-- BRANDS / HIGHLIGHTS -->
-    <section class="section section-shell" id="highlights">
-      <div class="section-heading centered-heading">
-        <span class="eyebrow">Your shopping journey</span>
-        <h2>More reasons to <span>visit.</span></h2>
-        <p>Discover the convenience of exploring multiple shopping categories.</p>
-      </div>
-
-      <div class="highlight-grid">
-        <article class="highlight-card glass-panel">
-          <span class="highlight-icon">✦</span>
-          <h3>Discover New Finds</h3>
-          <p>Explore different products and categories during your next visit.</p>
-        </article>
-        <article class="highlight-card glass-panel">
-          <span class="highlight-icon">⌖</span>
-          <h3>Find a Store</h3>
-          <p>Use the store directory to find a location and plan your trip.</p>
-        </article>
-        <article class="highlight-card glass-panel">
-          <span class="highlight-icon">♡</span>
-          <h3>Shop for Everyone</h3>
-          <p>Browse shopping categories suited to different needs and occasions.</p>
-        </article>
-      </div>
+      <p class="section-note">
+        For current offers, availability, and terms, please contact the store.
+      </p>
     </section>
 
     <!-- STORES -->
-    <section class="section section-shell stores-section" id="stores">
+    <section class="section section-light" id="stores">
       <div class="section-heading">
-        <div>
-          <span class="eyebrow">Come visit us</span>
-          <h2>Find your <span>Tiong San.</span></h2>
-          <p>Explore these store listings and check directions before travelling.</p>
-        </div>
+        <span class="eyebrow red">VISIT US</span>
+        <h2>Find Our Stores</h2>
+        <p>Plan your next visit to Tiong San.</p>
       </div>
 
       <div class="store-grid">
-        <article class="store-card glass-panel">
+        <article class="store-card">
           <div class="store-image">
             <img
               src="https://i0.wp.com/mymonol.com/wp-content/uploads/2023/07/tiongsan-harisson.png?ssl=1"
-              alt="Tiong San Harrison Road storefront"
-              loading="lazy"
-            >
-            <span class="store-badge">Baguio City</span>
+              alt="Tiong San Harrison store"
+              loading="lazy">
+            <span class="store-badge">BAGUIO CITY</span>
           </div>
-          <div class="store-content">
-            <span class="store-label">STORE LOCATION</span>
+          <div class="store-info">
+            <span class="eyebrow red">STORE 01</span>
             <h3>Tiong San Harrison</h3>
-            <p class="store-address">Harrison Road, Baguio City, Benguet</p>
-            <div class="store-actions">
-              <a class="button button-primary button-small"
-                href="https://maps.app.goo.gl/jgEx2F6yUgXfqhv6A"
-                target="_blank" rel="noopener noreferrer">
-                Get Directions ↗
-              </a>
-              <a class="store-more" href="#contact">Contact us</a>
-            </div>
+            <p>Harrison Road area, Baguio City, Benguet.</p>
+            <a class="text-link"
+               href="https://maps.app.goo.gl/jgEx2F6yUgXfqhv6A"
+               target="_blank" rel="noopener noreferrer">
+              Get Directions <span>↗</span>
+            </a>
           </div>
         </article>
 
-        <article class="store-card glass-panel">
-          <div class="store-image">
+        <article class="store-card">
+          <div class="store-image store-placeholder">
             <img
               src="https://file1.hpage.com/000929/17/bilder/tiong_san_kaufhaus.jpg"
-              alt="Tiong San retail building"
-              loading="lazy"
-            >
-            <span class="store-badge">La Trinidad area</span>
+              alt="Tiong San store building"
+              loading="lazy">
+            <span class="store-badge">LA TRINIDAD</span>
           </div>
-          <div class="store-content">
-            <span class="store-label">STORE LOCATION</span>
+          <div class="store-info">
+            <span class="eyebrow red">STORE 02</span>
             <h3>Tiong San La Trinidad</h3>
-            <p class="store-address">La Trinidad, Benguet</p>
-            <div class="store-actions">
-              <a class="button button-primary button-small"
-                href="https://www.google.com/maps/search/?api=1&query=Tiong+San+La+Trinidad+Benguet"
-                target="_blank" rel="noopener noreferrer">
-                Find on Maps ↗
-              </a>
-              <a class="store-more" href="#contact">Contact us</a>
-            </div>
+            <p>La Trinidad, Benguet.</p>
+            <a class="text-link"
+               href="https://www.google.com/maps/search/?api=1&query=Tiong+San+La+Trinidad+Benguet"
+               target="_blank" rel="noopener noreferrer">
+              Get Directions <span>↗</span>
+            </a>
           </div>
         </article>
       </div>
-      <p class="section-footnote">
-        Confirm branch addresses, opening hours, and operating status before publishing. The second photo is illustrative and may not depict the La Trinidad branch.
+
+      <p class="section-note">
+        Please verify store addresses and operating hours before visiting.
       </p>
     </section>
 
     <!-- ABOUT -->
-    <section class="about-section" id="about">
-      <div class="about-inner section-shell">
-        <div class="about-image-wrap">
+    <section class="section about-section" id="about">
+      <div class="about-grid">
+        <div class="about-visual">
           <img
             src="https://tiongsan.com/images/photos/8.jpg"
-            alt="Products displayed at Tiong San"
-            loading="lazy"
-          >
-          <div class="about-image-label glass-panel">
-            <span>✦</span>
-            <div><strong>Tiong San</strong><small>A shopping destination</small></div>
+            alt="Tiong San shopping and retail"
+            loading="lazy">
+          <div class="about-caption">
+            <span>YOUR SHOPPING DESTINATION</span>
+            <strong>Tiong San</strong>
           </div>
         </div>
+
         <div class="about-copy">
-          <span class="eyebrow">About Tiong San</span>
-          <h2>A familiar name<br>for your <span>shopping days.</span></h2>
+          <span class="eyebrow red">ABOUT TIONG SAN</span>
+          <h2>A Familiar Name<br>in Shopping</h2>
           <p>
-            Tiong San is a shopping destination associated with Baguio and
-            nearby communities. This website brings store information,
-            featured shopping categories, and visit details together in one place.
+            Tiong San is a retail name associated with shopping in the
+            Cordillera region. This website brings together useful
+            information about departments, promotions, stores, and
+            ways to get in touch.
           </p>
           <p>
-            Our goal for this website is to make it easier for visitors to
-            explore, find useful information, and plan their next shopping trip.
+            Have a question about a product, store, or promotion?
+            Our contact details are here to help you get started.
           </p>
-          <a href="#contact" class="text-link">Get in touch <span>→</span></a>
+          <a class="btn btn-primary" href="#contact">Contact Our Team</a>
+          <a class="official-link" href="https://tiongsan.com/"
+             target="_blank" rel="noopener noreferrer">
+            Visit the existing website ↗
+          </a>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="section section-shell contact-section" id="contact">
-      <div class="contact-panel glass-panel">
-        <div class="contact-copy">
-          <span class="eyebrow">We're here to help</span>
-          <h2>Have a question?</h2>
-          <p>
-            Need help with store information or a shopping inquiry?
-            Contact Tiong San through its official channels.
+    <section class="section contact-section" id="contact">
+      <div class="section-heading">
+        <span class="eyebrow red">GET IN TOUCH</span>
+        <h2>Contact Tiong San</h2>
+        <p>You may also call — we'd love to hear from you!</p>
+      </div>
+
+      <div class="contact-layout">
+        <div class="contact-details">
+          <div class="contact-card">
+            <div class="contact-icon">☎</div>
+            <div>
+              <span class="contact-label">LANDLINE</span>
+              <h3>(074) 422.1228</h3>
+              <a href="tel:+63744221228">Call landline ↗</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">S</div>
+            <div>
+              <span class="contact-label">SMART</span>
+              <h3>+63956-378-5145</h3>
+              <a href="tel:+639563785145">Call Smart ↗</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">G</div>
+            <div>
+              <span class="contact-label">GLOBE</span>
+              <h3>+63908-990-8987</h3>
+              <a href="tel:+639089908987">Call Globe ↗</a>
+            </div>
+          </div>
+
+          <div class="contact-note">
+            <span>✦</span>
+            <p>
+              For product inquiries, promotions, or other concerns,
+              please contact us using the numbers above.
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-form-card">
+          <h3>Send an Inquiry</h3>
+          <p class="form-intro">
+            Fill out the form to prepare an inquiry using your email app.
           </p>
-          <a href="https://tiongsan.com/" target="_blank"
-            rel="noopener noreferrer" class="button button-primary">
-            Visit Official Website ↗
-          </a>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">⌖</div>
-          <div>
-            <strong>Find a store</strong>
-            <p>See directions and location information in our store directory.</p>
-            <a href="#stores" class="text-link">View stores →</a>
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">↗</div>
-          <div>
-            <strong>Official website</strong>
-            <p>Check official Tiong San information and announcements.</p>
-            <a href="https://tiongsan.com/" target="_blank"
-              rel="noopener noreferrer" class="text-link">tiongsan.com ↗</a>
-          </div>
+
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactName">Full Name *</label>
+                <input id="contactName" name="name" type="text"
+                       placeholder="Your name" required maxlength="100">
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">Email Address *</label>
+                <input id="contactEmail" name="email" type="email"
+                       placeholder="you@example.com" required maxlength="150">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactSubject">Subject *</label>
+              <select id="contactSubject" name="subject" required>
+                <option value="">Choose a subject</option>
+                <option>General Inquiry</option>
+                <option>Promotions and Discounts</option>
+                <option>Product Availability</option>
+                <option>Store Locations and Hours</option>
+                <option>Customer Feedback</option>
+                <option>Other Concern</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Your Message *</label>
+              <textarea id="contactMessage" name="message"
+                        rows="5" placeholder="How can we help you?"
+                        required maxlength="3000"></textarea>
+            </div>
+
+            <button class="btn btn-primary submit-btn" type="submit">
+              Prepare Email <span>↗</span>
+            </button>
+
+            <p class="form-status" id="formStatus" role="status"
+               aria-live="polite"></p>
+            <p class="form-disclaimer">
+              This form opens your default email application. It does not
+              send or store messages directly on this website.
+            </p>
+          </form>
         </div>
       </div>
     </section>
@@ -396,41 +398,41 @@
 
   <!-- FOOTER -->
   <footer class="site-footer">
-    <div class="footer-main section-shell">
+    <div class="footer-main">
       <div class="footer-brand">
-        <a href="#home" class="footer-logo" aria-label="Tiong San home">
-          <img src="assets/ts-logo.png" alt="Tiong San logo" class="footer-logo-image">
+        <a class="brand footer-logo" href="#home">
+          <img src="assets/ts-logo.png" alt="Tiong San logo"
+               onerror="this.style.display='none'">
+          <span class="brand-fallback">TIONG <b>SAN</b></span>
         </a>
-        <p>Your shopping destination in Baguio and nearby communities.</p>
+        <p>Your shopping destination.</p>
       </div>
 
       <div class="footer-column">
         <h3>Explore</h3>
         <a href="#departments">Departments</a>
         <a href="#promotions">Promotions</a>
-        <a href="#highlights">Highlights</a>
-      </div>
-
-      <div class="footer-column">
-        <h3>Information</h3>
         <a href="#stores">Our Stores</a>
         <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
       </div>
 
       <div class="footer-column">
-        <h3>Official Website</h3>
+        <h3>Contact</h3>
+        <a href="tel:+63744221228">(074) 422.1228</a>
+        <a href="tel:+639563785145">Smart: +63956-378-5145</a>
+        <a href="tel:+639089908987">Globe: +63908-990-8987</a>
         <a href="https://tiongsan.com/" target="_blank"
-          rel="noopener noreferrer">tiongsan.com ↗</a>
+           rel="noopener noreferrer">Official Website ↗</a>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <div class="section-shell footer-bottom-inner">
-        <p>© <span id="currentYear"></span> Tiong San Website. All rights reserved.</p>
-        <a href="#home">Back to top ↑</a>
-      </div>
+      <p>© <span id="currentYear"></span> Tiong San. All rights reserved.</p>
+      <a href="#home">Back to top ↑</a>
     </div>
   </footer>
+
+  <a class="back-to-top" id="backToTop" href="#home"
+     aria-label="Back to top">↑</a>
 </body>
 </html>
