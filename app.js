@@ -16,24 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
   /*
     CONTACT EMAIL SETUP
 
-    Replace the empty string below with the official
-    Tiong San email address before publishing.
+    Replace the empty string with Tiong San's
+    official email address when available.
 
     Example:
-    const CONTACT_EMAIL = "your-official-email@example.com";
-
-    No email address has been supplied yet, so the form
-    will prepare an email without a recipient. The customer
-    must enter the recipient before sending.
+    const CONTACT_EMAIL = "info@example.com";
   */
   const CONTACT_EMAIL = "";
 
-  // Update the copyright year automatically.
+  // Update copyright year automatically.
   if (currentYear) {
     currentYear.textContent = new Date().getFullYear();
   }
 
-  // Mobile navigation.
+  // =========================================
+  // MOBILE NAVIGATION
+  // =========================================
+
   function closeMenu() {
     if (!menuToggle || !mainNav) return;
 
@@ -85,7 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Highlight the navigation link for the visible section.
+  // =========================================
+  // ACTIVE NAVIGATION SECTION
+  // =========================================
+
   const sections = document.querySelectorAll("main section[id]");
 
   if ("IntersectionObserver" in window && sections.length) {
@@ -115,7 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Show the back-to-top button after scrolling.
+  // =========================================
+  // BACK TO TOP
+  // =========================================
+
   function updateBackToTop() {
     if (!backToTop) return;
 
@@ -131,7 +136,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateBackToTop();
 
-  // Hide images that fail to load.
+  // =========================================
+  // IMAGE ERROR HANDLING
+  // =========================================
+
   document.querySelectorAll("img").forEach((img) => {
     img.addEventListener("error", () => {
       img.classList.add("image-unavailable");
@@ -142,7 +150,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Contact form: prepare a message in the user's email application.
+  // =========================================
+  // SOCIAL MEDIA LINKS
+  // =========================================
+
+  document.querySelectorAll(".social-card").forEach((link) => {
+    const href = link.getAttribute("href");
+
+    // Prevent placeholder links from sending visitors nowhere.
+    if (
+      !href ||
+      href.startsWith("#") ||
+      href.includes("YOUR_FACEBOOK") ||
+      href.includes("YOUR_INSTAGRAM") ||
+      href.includes("YOUR_TIKTOK")
+    ) {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+      });
+
+      link.setAttribute("aria-disabled", "true");
+      link.title = "Social media profile link has not been configured yet.";
+      link.classList.add("social-link-unavailable");
+      return;
+    }
+
+    // Open external social profiles in a separate tab.
+    if (/^https:\/\/(www\.)?(facebook\.com|instagram\.com|tiktok\.com)\//i.test(href)) {
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener noreferrer");
+    }
+  });
+
+  // =========================================
+  // CONTACT FORM
+  // =========================================
+
   if (contactForm && formStatus) {
     contactForm.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -163,6 +206,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!name || !email || !subject || !message) {
         formStatus.textContent =
           "Please complete all required fields.";
+        return;
+      }
+
+      // Basic email format validation.
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+        formStatus.textContent =
+          "Please enter a valid email address.";
         return;
       }
 
@@ -191,10 +243,16 @@ document.addEventListener("DOMContentLoaded", () => {
         `?subject=${encodeURIComponent(emailSubject)}` +
         `&body=${encodeURIComponent(emailBody)}`;
 
+      if (!recipient) {
+        formStatus.textContent =
+          "The website email recipient has not been configured yet. " +
+          "Please contact Tiong San using the phone numbers listed on this website.";
+        return;
+      }
+
       formStatus.textContent =
         "Opening your email application. Please review and send your message.";
 
-      // Open the user's configured email application.
       window.location.href = mailtoUrl;
     });
   }
