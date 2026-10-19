@@ -1,221 +1,194 @@
 
 /* =========================================
-   TIONG SAN — AMBIENT BACKGROUND ANIMATION
-   Gradient waves + glass bubbles + particles
+   TIONG SAN — AMBIENT BACKGROUND
+   Burgundy • Gold • Cream
    ========================================= */
 
 :root {
-  --ambient-cream: #fffaf2;
-  --ambient-red: rgba(169, 0, 0, 0.10);
-  --ambient-dark-red: rgba(95, 0, 0, 0.07);
-  --ambient-gold: rgba(199, 154, 43, 0.13);
+  --ambient-cream: #fbf7ef;
+  --ambient-burgundy: #780000;
+  --ambient-red: #a90000;
+  --ambient-gold: #c79a2b;
 }
 
-/* Keep the animated background behind the website */
+/* Keep the page background layer behind all content */
+html {
+  min-height: 100%;
+  background-color: var(--ambient-cream);
+}
+
 body {
+  position: relative;
   isolation: isolate;
+  min-height: 100vh;
 }
 
-/* Fixed background layer */
+/* Fixed decorative layer */
 .ambient-background {
   position: fixed;
   inset: 0;
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  background: var(--ambient-cream);
+  background:
+    radial-gradient(
+      ellipse at 8% 10%,
+      rgb(201 154 43 / 9%),
+      transparent 35%
+    ),
+    radial-gradient(
+      ellipse at 92% 24%,
+      rgb(169 0 0 / 7%),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #fbf7ef 0%,
+      #f8f2e8 48%,
+      #fffaf2 100%
+    );
 }
 
-/* Large, soft animated gradient waves */
+/* Soft moving gradient waves */
 .ambient-background::before,
 .ambient-background::after {
   content: "";
   position: absolute;
-  width: 75vw;
-  height: 75vw;
-  min-width: 420px;
-  min-height: 420px;
-  max-width: 1100px;
-  max-height: 1100px;
-  border-radius: 50%;
-  filter: blur(75px);
-  opacity: 0.75;
+  inset: -20%;
+  border-radius: 45%;
   will-change: transform;
 }
 
 .ambient-background::before {
-  top: -35%;
-  left: -20%;
   background:
     radial-gradient(
-      circle at 35% 35%,
-      var(--ambient-gold) 0%,
-      transparent 48%
+      ellipse at 25% 35%,
+      rgb(169 0 0 / 8%) 0%,
+      transparent 42%
     ),
     radial-gradient(
-      circle at 65% 60%,
-      var(--ambient-red) 0%,
-      transparent 55%
+      ellipse at 75% 65%,
+      rgb(199 154 43 / 11%) 0%,
+      transparent 40%
     );
-  animation: ambient-wave-one 30s ease-in-out infinite alternate;
+  filter: blur(48px);
+  animation: ambient-wave-one 32s ease-in-out infinite alternate;
 }
 
 .ambient-background::after {
-  right: -25%;
-  bottom: -40%;
   background:
     radial-gradient(
-      circle at 35% 40%,
-      var(--ambient-red) 0%,
-      transparent 50%
+      ellipse at 70% 20%,
+      rgb(120 0 0 / 6%) 0%,
+      transparent 38%
     ),
     radial-gradient(
-      circle at 65% 65%,
-      var(--ambient-gold) 0%,
-      transparent 48%
+      ellipse at 30% 80%,
+      rgb(240 207 104 / 12%) 0%,
+      transparent 42%
     );
-  animation: ambient-wave-two 36s ease-in-out infinite alternate;
+  filter: blur(58px);
+  animation: ambient-wave-two 40s ease-in-out infinite alternate;
 }
 
-/* Floating glass bubbles */
+/* Floating glass-like bubbles */
 .ambient-bubble {
   position: absolute;
   display: block;
-  width: var(--bubble-size, 90px);
-  height: var(--bubble-size, 90px);
-  left: var(--bubble-left, 50%);
-  top: var(--bubble-top, 50%);
-  border: 1px solid rgba(255, 255, 255, 0.48);
+  left: var(--left, 50%);
+  top: var(--top, 50%);
+  width: var(--size, 90px);
+  height: var(--size, 90px);
+  border: 1px solid rgb(199 154 43 / 20%);
   border-radius: 50%;
   background:
     radial-gradient(
-      circle at 28% 25%,
-      rgba(255, 255, 255, 0.48),
-      transparent 38%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(199, 154, 43, 0.055),
-      rgba(169, 0, 0, 0.035)
+      circle at 30% 25%,
+      rgb(255 255 255 / 42%),
+      rgb(199 154 43 / 3%) 65%,
+      rgb(169 0 0 / 3%)
     );
   box-shadow:
-    inset 0 0 24px rgba(255, 255, 255, 0.16),
-    0 8px 30px rgba(95, 0, 0, 0.025);
-  opacity: var(--bubble-opacity, 0.32);
-  animation: ambient-float var(--bubble-duration, 24s)
-    ease-in-out var(--bubble-delay, 0s) infinite alternate;
-  will-change: transform;
+    inset 0 0 18px rgb(255 255 255 / 20%),
+    0 0 28px rgb(199 154 43 / 5%);
+  opacity: var(--opacity, 0.35);
+  animation: ambient-float var(--duration, 20s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
 }
 
-/* Small drifting particles */
+/* Small rising particles */
 .ambient-particle {
   position: absolute;
   display: block;
-  left: var(--particle-left, 50%);
-  top: var(--particle-top, 50%);
-  width: var(--particle-size, 3px);
-  height: var(--particle-size, 3px);
+  left: var(--left, 50%);
+  bottom: -12px;
+  width: var(--size, 4px);
+  height: var(--size, 4px);
   border-radius: 50%;
   background: var(--particle-color, #c79a2b);
-  opacity: var(--particle-opacity, 0.38);
-  box-shadow: 0 0 8px rgba(199, 154, 43, 0.18);
-  animation: ambient-particle-drift var(--particle-duration, 22s)
-    linear var(--particle-delay, 0s) infinite;
-  will-change: transform, opacity;
+  box-shadow: 0 0 9px rgb(199 154 43 / 28%);
+  opacity: var(--opacity, 0.3);
+  animation: ambient-rise var(--duration, 18s) linear infinite;
+  animation-delay: var(--delay, 0s);
 }
 
-/* Gradient movement */
+/* Motion */
 @keyframes ambient-wave-one {
   0% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1);
   }
-
-  50% {
-    transform: translate3d(12%, 8%, 0) scale(1.08);
-  }
-
   100% {
-    transform: translate3d(5%, 18%, 0) scale(0.96);
+    transform: translate3d(4%, 3%, 0) rotate(12deg) scale(1.08);
   }
 }
 
 @keyframes ambient-wave-two {
   0% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(3%, 2%, 0) rotate(-8deg) scale(1.04);
   }
-
-  50% {
-    transform: translate3d(-12%, -8%, 0) scale(1.08);
-  }
-
   100% {
-    transform: translate3d(-5%, -16%, 0) scale(0.96);
+    transform: translate3d(-4%, -3%, 0) rotate(8deg) scale(0.98);
   }
 }
 
-/* Bubble floating movement */
 @keyframes ambient-float {
-  0% {
+  0%, 100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
-
   50% {
-    transform: translate3d(22px, -32px, 0) scale(1.05);
-  }
-
-  100% {
-    transform: translate3d(-15px, -55px, 0) scale(0.96);
+    transform: translate3d(12px, -24px, 0) scale(1.04);
   }
 }
 
-/* Particle movement */
-@keyframes ambient-particle-drift {
+@keyframes ambient-rise {
   0% {
-    transform: translate3d(0, 15px, 0);
+    transform: translate3d(0, 0, 0);
     opacity: 0;
   }
-
-  15% {
-    opacity: var(--particle-opacity, 0.38);
+  12% {
+    opacity: var(--opacity, 0.3);
   }
-
-  75% {
-    opacity: var(--particle-opacity, 0.38);
+  85% {
+    opacity: var(--opacity, 0.3);
   }
-
   100% {
-    transform: translate3d(25px, -110px, 0);
+    transform: translate3d(24px, -110vh, 0);
     opacity: 0;
   }
 }
 
-/* Keep the animation restrained on smaller screens */
+/* Smaller effects on phones */
 @media (max-width: 768px) {
-  .ambient-background::before,
-  .ambient-background::after {
-    width: 115vw;
-    height: 115vw;
-    min-width: 360px;
-    min-height: 360px;
-    filter: blur(55px);
-  }
-
   .ambient-background::before {
-    top: -20%;
-    left: -45%;
+    filter: blur(34px);
   }
 
   .ambient-background::after {
-    right: -45%;
-    bottom: -20%;
+    filter: blur(40px);
   }
 
   .ambient-bubble {
-    opacity: 0.20;
-  }
-
-  .ambient-particle {
-    opacity: 0.26;
+    opacity: 0.22;
   }
 }
 
@@ -226,14 +199,11 @@ body {
   .ambient-bubble,
   .ambient-particle {
     animation: none !important;
-    will-change: auto;
+    transition: none !important;
   }
 
-  .ambient-background::before {
-    transform: none;
-  }
-
-  .ambient-background::after {
-    transform: none;
+  .ambient-bubble,
+  .ambient-particle {
+    display: none !important;
   }
 }

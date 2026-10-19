@@ -1,163 +1,131 @@
 
 /* =========================================
-   TIONG SAN — AMBIENT BACKGROUND
-   Creates glass bubbles and floating particles.
-   No external libraries required.
+   TIONG SAN — AMBIENT BACKGROUND SCRIPT
    ========================================= */
 
 (() => {
   "use strict";
 
-  function initializeAmbientBackground() {
-    // Prevent duplicate background layers.
-    if (document.querySelector(".ambient-background")) {
-      return;
-    }
+  const BACKGROUND_CLASS = "ambient-background";
+  const BUBBLE_CLASS = "ambient-bubble";
+  const PARTICLE_CLASS = "ambient-particle";
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
+  const motionQuery = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  );
 
-    const background = document.createElement("div");
-    background.className = "ambient-background";
-    background.setAttribute("aria-hidden", "true");
+  let background = null;
 
-    // Insert first so the layer stays behind the website content.
-    document.body.prepend(background);
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
 
-    // Keep the static cream and gradient background, but do not
-    // create moving decorative elements for reduced-motion users.
-    if (reducedMotion.matches) {
-      return;
-    }
+  function clearEffects() {
+    if (!background) return;
 
-    const random = (min, max) =>
-      Math.random() * (max - min) + min;
+    background
+      .querySelectorAll(`.${BUBBLE_CLASS}, .${PARTICLE_CLASS}`)
+      .forEach((element) => element.remove());
+  }
 
-    // -----------------------------------------
-    // GLASS BUBBLES
-    // -----------------------------------------
+  function createBubble(index) {
+    const bubble = document.createElement("span");
+    bubble.className = BUBBLE_CLASS;
+    bubble.setAttribute("aria-hidden", "true");
 
-    const bubbleCount = window.innerWidth <= 768 ? 5 : 9;
+    const size = random(45, 150);
+
+    bubble.style.setProperty("--left", `${random(2, 95)}%`);
+    bubble.style.setProperty("--top", `${random(3, 95)}%`);
+    bubble.style.setProperty("--size", `${size}px`);
+    bubble.style.setProperty("--opacity", random(0.15, 0.35).toFixed(2));
+    bubble.style.setProperty("--duration", `${random(18, 32)}s`);
+    bubble.style.setProperty("--delay", `${-random(0, 25)}s`);
+
+    return bubble;
+  }
+
+  function createParticle(index) {
+    const particle = document.createElement("span");
+    particle.className = PARTICLE_CLASS;
+    particle.setAttribute("aria-hidden", "true");
+
+    const size = random(2, 5);
+    const goldOrRed = Math.random() > 0.25
+      ? "#c79a2b"
+      : "#a90000";
+
+    particle.style.setProperty("--left", `${random(1, 99)}%`);
+    particle.style.setProperty("--size", `${size}px`);
+    particle.style.setProperty("--opacity", random(0.15, 0.4).toFixed(2));
+    particle.style.setProperty("--particle-color", goldOrRed);
+    particle.style.setProperty("--duration", `${random(14, 27)}s`);
+    particle.style.setProperty("--delay", `${-random(0, 25)}s`);
+
+    return particle;
+  }
+
+  function buildEffects() {
+    if (!background) return;
+
+    clearEffects();
+
+    // Keep the background still for visitors who prefer reduced motion.
+    if (motionQuery.matches) return;
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const bubbleCount = isMobile ? 4 : 8;
+    const particleCount = isMobile ? 8 : 16;
+
+    const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < bubbleCount; i++) {
-      const bubble = document.createElement("span");
-
-      bubble.className = "ambient-bubble";
-
-      bubble.style.setProperty(
-        "--bubble-size",
-        `${Math.round(random(35, 125))}px`
-      );
-
-      bubble.style.setProperty(
-        "--bubble-left",
-        `${random(2, 94)}%`
-      );
-
-      bubble.style.setProperty(
-        "--bubble-top",
-        `${random(5, 95)}%`
-      );
-
-      bubble.style.setProperty(
-        "--bubble-duration",
-        `${Math.round(random(18, 32))}s`
-      );
-
-      bubble.style.setProperty(
-        "--bubble-delay",
-        `${-random(0, 25)}s`
-      );
-
-      bubble.style.setProperty(
-        "--bubble-opacity",
-        random(0.16, 0.34).toFixed(2)
-      );
-
-      background.appendChild(bubble);
+      fragment.appendChild(createBubble(i));
     }
-
-    // -----------------------------------------
-    // FLOATING GOLD AND BURGUNDY PARTICLES
-    // -----------------------------------------
-
-    const particleCount = window.innerWidth <= 768 ? 10 : 22;
-
-    const particleColors = [
-      "#c79a2b",
-      "#a90000",
-      "#e0bd69",
-      "#780000"
-    ];
 
     for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement("span");
-
-      particle.className = "ambient-particle";
-
-      particle.style.setProperty(
-        "--particle-left",
-        `${random(1, 99)}%`
-      );
-
-      particle.style.setProperty(
-        "--particle-top",
-        `${random(10, 100)}%`
-      );
-
-      particle.style.setProperty(
-        "--particle-size",
-        `${random(2, 4).toFixed(1)}px`
-      );
-
-      particle.style.setProperty(
-        "--particle-color",
-        particleColors[
-          Math.floor(Math.random() * particleColors.length)
-        ]
-      );
-
-      particle.style.setProperty(
-        "--particle-opacity",
-        random(0.18, 0.42).toFixed(2)
-      );
-
-      particle.style.setProperty(
-        "--particle-duration",
-        `${Math.round(random(16, 28))}s`
-      );
-
-      particle.style.setProperty(
-        "--particle-delay",
-        `${-random(0, 25)}s`
-      );
-
-      background.appendChild(particle);
+      fragment.appendChild(createParticle(i));
     }
 
-    // If the visitor changes their OS accessibility preference
-    // while the page is open, stop or resume decorative motion.
-    reducedMotion.addEventListener("change", (event) => {
-      if (event.matches) {
-        background
-          .querySelectorAll(".ambient-bubble, .ambient-particle")
-          .forEach((element) => element.remove());
-      } else if (!background.querySelector(".ambient-bubble")) {
-        // Rebuild once if motion is enabled again.
-        background.remove();
-        initializeAmbientBackground();
-      }
-    });
+    background.appendChild(fragment);
+  }
+
+  function initializeBackground() {
+    if (!document.body) return;
+
+    background = document.querySelector(`.${BACKGROUND_CLASS}`);
+
+    if (!background) {
+      background = document.createElement("div");
+      background.className = BACKGROUND_CLASS;
+      background.setAttribute("aria-hidden", "true");
+
+      // Insert first so the decorative layer stays behind page content.
+      document.body.prepend(background);
+    }
+
+    buildEffects();
+  }
+
+  // Rebuild only when the visitor changes their motion preference.
+  function handleMotionChange() {
+    buildEffects();
   }
 
   if (document.readyState === "loading") {
     document.addEventListener(
       "DOMContentLoaded",
-      initializeAmbientBackground,
+      initializeBackground,
       { once: true }
     );
   } else {
-    initializeAmbientBackground();
+    initializeBackground();
+  }
+
+  if (motionQuery.addEventListener) {
+    motionQuery.addEventListener("change", handleMotionChange);
+  } else {
+    // Compatibility with older browsers.
+    motionQuery.addListener(handleMotionChange);
   }
 })();
