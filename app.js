@@ -114,6 +114,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* =========================================
+   TIONG SAN — LOADING SKELETON CONTROLLER
+   ========================================= */
+
+  (() => {
+    "use strict";
+
+    const loader = document.getElementById("pageLoader");
+
+    if (!loader) return;
+
+    let dismissed = false;
+
+    function hideLoader() {
+      if (dismissed) return;
+      dismissed = true;
+
+      loader.classList.add("is-hidden");
+      loader.setAttribute("aria-hidden", "true");
+      loader.removeAttribute("role");
+
+      // Remove the overlay after its fade-out.
+      window.setTimeout(() => {
+        loader.remove();
+      }, 400);
+    }
+
+    // Wait for images, stylesheets, and other page resources.
+    if (document.readyState === "complete") {
+      hideLoader();
+    } else {
+      window.addEventListener("load", hideLoader, { once: true });
+    }
+
+    // Safety fallback if a resource takes too long.
+    // The website should not remain covered indefinitely.
+    window.setTimeout(hideLoader, 8000);
+  })();
+
   // =========================================
   // BACK TO TOP
   // =========================================

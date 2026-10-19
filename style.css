@@ -2087,3 +2087,196 @@ section {
     transform: none;
   }
 }
+
+/* =========================================
+   TIONG SAN — LOADING SKELETON
+   ========================================= */
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #fbf7ef;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 350ms ease,
+    visibility 350ms ease;
+}
+
+.page-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.skeleton-container {
+  width: min(100%, 920px);
+}
+
+.skeleton-brand {
+  width: 155px;
+  height: 35px;
+  margin-bottom: 54px;
+}
+
+.skeleton-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 46px;
+}
+
+.skeleton-line,
+.skeleton-block,
+.skeleton-circle {
+  position: relative;
+  overflow: hidden;
+  background: #eee5d8;
+  border-radius: 10px;
+}
+
+.skeleton-line::after,
+.skeleton-block::after,
+.skeleton-circle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 75%),
+    rgb(199 154 43 / 12%),
+    transparent
+  );
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-line {
+  height: 13px;
+  margin-bottom: 13px;
+}
+
+.skeleton-line.short {
+  width: 42%;
+}
+
+.skeleton-line.medium {
+  width: 68%;
+}
+
+.skeleton-line.long {
+  width: 95%;
+}
+
+.skeleton-line.title {
+  width: 90%;
+  height: 35px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+}
+
+.skeleton-block {
+  min-height: 190px;
+  border-radius: 22px;
+}
+
+.skeleton-block.hero-image {
+  min-height: 260px;
+  border: 1px solid rgb(199 154 43 / 25%);
+  background: linear-gradient(
+    135deg,
+    #f0e3d0,
+    #f6eee3 55%,
+    #ead8bd
+  );
+}
+
+.skeleton-section-title {
+  width: 220px;
+  height: 23px;
+  margin-bottom: 20px;
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.skeleton-card {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgb(199 154 43 / 18%);
+  border-radius: 18px;
+  background: rgb(255 255 255 / 48%);
+  box-shadow: 0 8px 24px rgb(95 0 0 / 4%);
+}
+
+.skeleton-circle {
+  width: 54px;
+  height: 54px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+}
+
+.skeleton-card .skeleton-line {
+  height: 10px;
+  margin-bottom: 10px;
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Mobile layout */
+@media (max-width: 640px) {
+  .skeleton-brand {
+    margin-bottom: 36px;
+  }
+
+  .skeleton-hero {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .skeleton-block.hero-image {
+    min-height: 130px;
+  }
+
+  .skeleton-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .skeleton-card {
+    padding: 12px;
+  }
+
+  .skeleton-line.title {
+    height: 26px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-line::after,
+  .skeleton-block::after,
+  .skeleton-circle::after {
+    animation: none !important;
+    transform: none;
+    background: transparent;
+  }
+
+  .page-loader {
+    transition: none;
+  }
+}
