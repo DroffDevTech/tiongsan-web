@@ -1962,3 +1962,128 @@ section {
     padding: 13px;
   }
 }
+
+/* =========================================
+   TIONG SAN — EXTRA UI ANIMATIONS
+   Add to the END of style.css
+   ========================================= */
+
+/* Scroll reveal: activated by JavaScript */
+.motion-ready .reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-ready .reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero entrance */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-content {
+    animation: hero-enter 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .hero-bottom {
+    animation: hero-enter 900ms 250ms ease both;
+  }
+
+  .brand img {
+    transition: transform 300ms ease;
+  }
+
+  .brand:hover img {
+    transform: scale(1.045);
+  }
+
+  .highlight-icon {
+    transition:
+      transform 300ms ease,
+      background 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  .highlight:hover .highlight-icon {
+    transform: translateY(-3px) rotate(-5deg);
+    background: rgb(199 154 43 / 20%);
+    box-shadow: 0 8px 20px rgb(120 0 0 / 8%);
+  }
+
+  .department-card {
+    transition:
+      transform 350ms ease,
+      box-shadow 350ms ease,
+      border-color 350ms ease;
+  }
+
+  .department-card:hover {
+    transform: translateY(-7px);
+    border-color: rgb(199 154 43 / 40%);
+    box-shadow: 0 22px 45px rgb(95 0 0 / 13%);
+  }
+
+  .department-card > img {
+    transition: transform 600ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .btn,
+  .hero-bottom a {
+    transition:
+      transform 250ms ease,
+      box-shadow 250ms ease,
+      background-color 250ms ease;
+  }
+
+  .hero-bottom a:hover {
+    transform: translateY(4px);
+    box-shadow: 0 0 18px rgb(240 207 104 / 28%);
+  }
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility: no entrance or scroll movement */
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-content,
+  .hero-bottom {
+    animation: none !important;
+  }
+
+  .brand img,
+  .highlight-icon,
+  .department-card,
+  .department-card > img,
+  .btn,
+  .hero-bottom a {
+    transition: none !important;
+  }
+
+  .department-card:hover,
+  .highlight:hover .highlight-icon,
+  .brand:hover img,
+  .hero-bottom a:hover,
+  .btn:hover {
+    transform: none;
+  }
+}
