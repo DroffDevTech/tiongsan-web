@@ -1,4 +1,3 @@
-
 /* =========================================
    TIONG SAN WEBSITE
    MAIN JAVASCRIPT
@@ -44,8 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (menuToggle && mainNav) {
     menuToggle.addEventListener("click", () => {
-      const isOpen =
-        menuToggle.getAttribute("aria-expanded") === "true";
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
 
       if (isOpen) {
         closeMenu();
@@ -99,8 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const sectionId = entry.target.id;
 
           navLinks.forEach((link) => {
-            const isActive =
-              link.getAttribute("href") === `#${sectionId}`;
+            const isActive = link.getAttribute("href") === `#${sectionId}`;
 
             link.classList.toggle("active", isActive);
           });
@@ -108,8 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         rootMargin: "-25% 0px -60% 0px",
-        threshold: 0
-      }
+        threshold: 0,
+      },
     );
 
     sections.forEach((section) => {
@@ -124,17 +121,89 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateBackToTop() {
     if (!backToTop) return;
 
-    backToTop.classList.toggle(
-      "visible",
-      window.scrollY > 500
-    );
+    backToTop.classList.toggle("visible", window.scrollY > 500);
   }
 
   window.addEventListener("scroll", updateBackToTop, {
-    passive: true
+    passive: true,
   });
 
   updateBackToTop();
+
+  /* =========================================
+   TIONG SAN — SCROLL REVEAL ANIMATIONS
+   Add to the END of app.js
+   ========================================= */
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    // Respect the visitor's motion preference.
+    if (reducedMotion.matches) return;
+
+    const revealSelectors = [
+      ".section-heading",
+      ".highlight",
+      ".department-card",
+      ".promo-panel",
+      ".about-copy",
+      ".about-visual",
+    ];
+
+    const elements = document.querySelectorAll(revealSelectors.join(", "));
+
+    if (!elements.length) return;
+
+    // If IntersectionObserver isn't supported, show everything normally.
+    if (!("IntersectionObserver" in window)) return;
+
+    document.documentElement.classList.add("motion-ready");
+
+    elements.forEach((element, index) => {
+      element.classList.add("reveal-on-scroll");
+
+      // Small stagger between neighboring elements.
+      element.style.setProperty("--reveal-delay", `${(index % 4) * 80}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add("is-visible");
+          currentObserver.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -35px 0px",
+      },
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    // If the visitor enables reduced motion while the page is open,
+    // reveal all content immediately.
+    function handleMotionPreference(event) {
+      if (!event.matches) return;
+
+      document.documentElement.classList.remove("motion-ready");
+
+      elements.forEach((element) => {
+        element.classList.add("is-visible");
+        element.style.removeProperty("--reveal-delay");
+      });
+
+      observer.disconnect();
+    }
+
+    if (reducedMotion.addEventListener) {
+      reducedMotion.addEventListener("change", handleMotionPreference);
+    } else {
+      reducedMotion.addListener(handleMotionPreference);
+    }
+  });
 
   // =========================================
   // IMAGE ERROR HANDLING
@@ -176,7 +245,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Open external social profiles in a separate tab.
-    if (/^https:\/\/(www\.)?(facebook\.com|instagram\.com|tiktok\.com)\//i.test(href)) {
+    if (
+      /^https:\/\/(www\.)?(facebook\.com|instagram\.com|tiktok\.com)\//i.test(
+        href,
+      )
+    ) {
       link.setAttribute("target", "_blank");
       link.setAttribute("rel", "noopener noreferrer");
     }
@@ -204,8 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const message = String(formData.get("message") || "").trim();
 
       if (!name || !email || !subject || !message) {
-        formStatus.textContent =
-          "Please complete all required fields.";
+        formStatus.textContent = "Please complete all required fields.";
         return;
       }
 
@@ -213,13 +285,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       if (!emailPattern.test(email)) {
-        formStatus.textContent =
-          "Please enter a valid email address.";
+        formStatus.textContent = "Please enter a valid email address.";
         return;
       }
 
-      const emailSubject =
-        `Tiong San Website Inquiry: ${subject}`;
+      const emailSubject = `Tiong San Website Inquiry: ${subject}`;
 
       const emailBody = [
         "Hello Tiong San Team,",
@@ -233,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Message:",
         message,
         "",
-        "Sent through the Tiong San website contact form."
+        "Sent through the Tiong San website contact form.",
       ].join("\n");
 
       const recipient = CONTACT_EMAIL.trim();
@@ -257,4 +327,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
- 
