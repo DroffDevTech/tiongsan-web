@@ -1671,3 +1671,294 @@ section {
     padding: 25px 18px;
   }
 }
+
+/* =========================================
+   CIVIC & SOCIAL RESPONSE ACTIVITIES
+   ========================================= */
+
+.civic-section {
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 8% 20%,
+      rgba(240, 207, 104, 0.13),
+      transparent 30%
+    ),
+    rgba(255, 255, 255, 0.35);
+  border-block: 1px solid rgba(120, 0, 0, 0.06);
+}
+
+.civic-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: 65px;
+}
+
+.civic-visual {
+  position: relative;
+  min-width: 0;
+  padding: 0 15px 30px 0;
+}
+
+.civic-visual-inner {
+  position: relative;
+  display: flex;
+  min-height: 460px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 28px;
+  color: white;
+  background:
+    radial-gradient(
+      circle at 80% 18%,
+      rgba(240, 207, 104, 0.3),
+      transparent 32%
+    ),
+    linear-gradient(145deg, #c51d1d, #780000 65%, #5f0000);
+  box-shadow: 0 20px 55px rgba(80, 10, 10, 0.14);
+}
+
+.civic-icon {
+  position: absolute;
+  top: 30px;
+  left: 32px;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 17px;
+  color: #f0cf68;
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 29px;
+  backdrop-filter: blur(12px);
+}
+
+.civic-small-label {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 13px;
+  color: #f0cf68;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+.civic-visual-inner > h3 {
+  position: relative;
+  z-index: 1;
+  max-width: 360px;
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+}
+
+.civic-visual-inner > h3 span {
+  color: #f0cf68;
+}
+
+.civic-decoration {
+  position: absolute;
+  border: 1px solid rgba(240, 207, 104, 0.32);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.civic-decoration-one {
+  top: 75px;
+  right: -75px;
+  width: 270px;
+  height: 270px;
+}
+
+.civic-decoration-two {
+  top: 125px;
+  right: -25px;
+  width: 170px;
+  height: 170px;
+}
+
+.civic-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 17px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 35px rgba(80, 30, 15, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.civic-caption-icon {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 13px;
+  color: var(--red);
+  background: rgba(240, 207, 104, 0.25);
+  font-size: 22px;
+}
+
+.civic-caption strong {
+  display: block;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.civic-caption p {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.civic-content > .eyebrow {
+  margin-bottom: 13px;
+}
+
+.civic-content > h2 {
+  font-size: clamp(30px, 3.3vw, 42px);
+  font-weight: 800;
+  letter-spacing: -1.8px;
+  line-height: 1.2;
+}
+
+.civic-content > h2 span {
+  color: var(--red);
+}
+
+.civic-content > p {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.95;
+}
+
+.civic-content > .civic-lead {
+  color: #514741;
+  font-size: 13px;
+}
+
+.civic-lead strong {
+  color: var(--red);
+}
+
+.civic-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  margin-top: 26px;
+}
+
+.civic-focus {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 15px 12px;
+  border: 1px solid rgba(120, 0, 0, 0.09);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.65);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.civic-focus:hover {
+  transform: translateY(-3px);
+  border-color: rgba(199, 154, 43, 0.6);
+}
+
+.civic-focus-icon {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 11px;
+  color: var(--red);
+  background: rgba(240, 207, 104, 0.2);
+  font-size: 19px;
+}
+
+.civic-focus h3 {
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.civic-focus p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.civic-button {
+  margin-top: 25px;
+}
+
+/* Civic section on tablets and phones */
+
+@media (max-width: 1000px) {
+  .civic-grid {
+    gap: 35px;
+  }
+
+  .civic-visual-inner {
+    min-height: 410px;
+    padding: 25px;
+  }
+
+  .civic-focus-grid {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  .civic-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .civic-visual {
+    margin-right: 10px;
+  }
+
+  .civic-visual-inner {
+    min-height: 350px;
+    padding: 27px;
+  }
+
+  .civic-content > h2 {
+    font-size: clamp(30px, 7vw, 39px);
+  }
+}
+
+@media (max-width: 460px) {
+  .civic-focus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .civic-visual-inner {
+    min-height: 310px;
+    padding: 23px;
+  }
+
+  .civic-visual-inner > h3 {
+    font-size: 30px;
+  }
+
+  .civic-caption {
+    left: 12px;
+    padding: 13px;
+  }
+}
